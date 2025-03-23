@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRACTICE TEST 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            padding: 5px;
+            background: #e0e0e0;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .summary {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>PRACTICE TEST 2</h2>
+        <div id="quiz"></div>
+        <p class="summary" id="score"></p>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Ms. Carpenter will be attending the conference with ____ marketing team.",
+                options: ["She", "her", "hers", "herself"],
+                correct: 1,
+                vocab: "attending (v) = tham dự\nconference (n) = hội nghị",
+                explanation: "Đáp án đúng: 'her'. Đây là cách sử dụng đúng đại từ sở hữu.",
+                translation: "Cô Carpenter sẽ tham dự hội nghị với đội ngũ tiếp thị của cô ấy."
+            },
+            {
+                question: "____ the last ten years, Bay City's population has grown by about 27 percent.",
+                options: ["As", "Again", "During", "Below"],
+                correct: 2,
+                vocab: "population (n) = dân số\npercent (n) = phần trăm",
+                explanation: "Đáp án đúng: 'During'. 'During the last ten years' có nghĩa là 'trong mười năm qua'.",
+                translation: "Trong mười năm qua, dân số của thành phố Bay đã tăng khoảng 27 phần trăm."
+            },
+            {
+                question: "Please congratulate Alan Schmit, ____ of the Leadership Award in Nursing at Knoll Hospital.",
+                options: ["won", "wins", "winning", "winner"],
+                correct: 3,
+                vocab: "congratulate (v) = chúc mừng\naward (n) = giải thưởng",
+                explanation: "Đáp án đúng: 'winner'. 'Winner' là danh từ chỉ người nhận giải thưởng.",
+                translation: "Xin chúc mừng Alan Schmit, người đã nhận Giải thưởng Lãnh đạo trong lĩnh vực Điều dưỡng tại Bệnh viện Knoll."
+            },
+            {
+                question: "Ireland's largest software producer will ____ be opening a large facility in Cork.",
+                options: ["soon", "such", "ever", "like"],
+                correct: 0,
+                vocab: "producer (n) = nhà sản xuất\nfacility (n) = cơ sở",
+                explanation: "Đáp án đúng: 'soon'. 'Will soon be opening' có nghĩa là 'sẽ sớm mở'.",
+                translation: "Nhà sản xuất phần mềm lớn nhất của Ireland sẽ sớm mở một cơ sở lớn ở Cork."
+            },
+            {
+                question: "Ashburn Bank's online service has been in high demand ____.",
+                options: ["lateness", "later", "lately", "latest"],
+                correct: 2,
+                vocab: "online service (n) = dịch vụ trực tuyến\ndemand (n) = nhu cầu",
+                explanation: "Đáp án đúng: 'lately'. 'In high demand lately' có nghĩa là 'gần đây có nhu cầu cao'.",
+                translation: "Dịch vụ trực tuyến của Ngân hàng Ashburn đã có nhu cầu cao gần đây."
+            },
+            {
+                question: "The ____ of videos to electronic press releases can help companies showcase their products.",
+                options: ["content", "addition", "picture", "promotion"],
+                correct: 1,
+                vocab: "addition (n) = sự bổ sung\nshowcase (v) = trưng bày",
+                explanation: "Đáp án đúng: 'addition'. 'The addition of videos' có nghĩa là 'sự bổ sung video'.",
+                translation: "Sự bổ sung video vào thông cáo báo chí điện tử có thể giúp các công ty trưng bày sản phẩm của họ."
+            },
+            {
+                question: "Ms. Hyun is reviewing the training manual to see if updates ____.",
+                options: ["have need", "needing", "are needed", "to be needed"],
+                correct: 2,
+                vocab: "reviewing (v) = xem xét\nmanual (n) = sách hướng dẫn",
+                explanation: "Đáp án đúng: 'are needed'. Câu này sử dụng thì bị động.",
+                translation: "Cô Hyun đang xem xét sách hướng dẫn đào tạo để xem liệu có cần cập nhật không."
+            },
+            {
+                question: "When leaving the auditorium, please exit ____ the doors on the lower level.",
+                options: ["except", "inside", "without", "through"],
+                correct: 3,
+                vocab: "auditorium (n) = hội trường\nexit (v) = ra ngoài",
+                explanation: "Đáp án đúng: 'through'. 'Exit through the doors' có nghĩa là 'ra ngoài qua các cửa'.",
+                translation: "Khi rời khỏi hội trường, vui lòng ra ngoài qua các cửa ở tầng dưới."
+            },
+            {
+                question: "The judges for this year's screenplay competition include ____ from Hanovi Studios.",
+                options: ["represents", "representatives", "represented", "represent"],
+                correct: 1,
+                vocab: "judges (n) = giám khảo\ncompetition (n) = cuộc thi",
+                explanation: "Đáp án đúng: 'representatives'. 'Include representatives' có nghĩa là 'bao gồm các đại diện'.",
+                translation: "Các giám khảo cho cuộc thi kịch bản năm nay bao gồm các đại diện từ Hanovi Studios."
+            },
+            {
+                question: "I have attached my resume detailing my ____ experience in the hotel industry.",
+                options: ["extensive", "punctual", "prospective", "accepted"],
+                correct: 0,
+                vocab: "resume (n) = sơ yếu lý lịch\nexperience (n) = kinh nghiệm",
+                explanation: "Đáp án đúng: 'extensive'. 'Extensive experience' có nghĩa là 'kinh nghiệm phong phú'.",
+                translation: "Tôi đã đính kèm sơ yếu lý lịch của mình chi tiết về kinh nghiệm phong phú trong ngành khách sạn."
+            },
+            {
+                question: "Remember to check the spelling of Mr. Kamashi's name when ____ the document.",
+                options: ["revising", "revises", "revised", "revise"],
+                correct: 0,
+                vocab: "spelling (n) = chính tả\ncheck (v) = kiểm tra",
+                explanation: "Đáp án đúng: 'revising'. Câu này sử dụng thì hiện tại phân từ.",
+                translation: "Hãy nhớ kiểm tra chính tả tên của ông Kamashi khi xem xét tài liệu."
+            },
+            {
+                question: "Residents visited City Hall to ask ____ developers will preserve the historic properties.",
+                options: ["although", "since", "whether", "both"],
+                correct: 2,
+                vocab: "residents (n) = cư dân\nCity Hall (n) = tòa thị chính",
+                explanation: "Đáp án đúng: 'whether'. Câu này hỏi về việc có hay không.",
+                translation: "Cư dân đã đến tòa thị chính để hỏi liệu các nhà phát triển có bảo tồn các tài sản lịch sử hay không."
+            },
+            {
+                question: "The Ford Group's proposed advertising campaign is by far the most ____ we have seen so far.",
+                options: ["innovate", "innovative", "innovations", "innovatively"],
+                correct: 1,
+                vocab: "advertising (n) = quảng cáo\ncampaign (n) = chiến dịch",
+                explanation: "Đáp án đúng: 'innovative'. 'Most innovative' có nghĩa là 'sáng tạo nhất'.",
+                translation: "Chiến dịch quảng cáo được đề xuất của Ford Group là sáng tạo nhất mà chúng tôi đã thấy cho đến nay."
+            },
+            {
+                question: "Solei Landscaping announced that the design for the Cherry Hill building complex is ____ complete.",
+                options: ["almost", "nearby", "anytime", "yet"],
+                correct: 0,
+                vocab: "landscaping (n) = cảnh quan\ndesign (n) = thiết kế",
+                explanation: "Đáp án đúng: 'almost'. 'Almost complete' có nghĩa là 'gần như hoàn thành'.",
+                translation: "Solei Landscaping thông báo rằng thiết kế cho khu phức hợp Cherry Hill gần như đã hoàn thành."
+            },
+            {
+                question: "Daniel Nishida, the chief supply officer, asked that ____ be given full responsibility for approving all invoices.",
+                options: ["he", "him", "his", "himself"],
+                correct: 3,
+                vocab: "responsibility (n) = trách nhiệm\napproving (v) = phê duyệt",
+                explanation: "Đáp án đúng: 'himself'. Câu này yêu cầu người thực hiện hành động.",
+                translation: "Daniel Nishida, giám đốc cung ứng, đã yêu cầu rằng chính ông được giao toàn bộ trách nhiệm phê duyệt tất cả các hóa đơn."
+            },
+            {
+                question: "In preparation for Mr. Kumar's retirement at the end of March, the Carolex Corporation will need to ____ a new facilities director.",
+                options: ["resume", "compete", "recruit", "conduct"],
+                correct: 2,
+                vocab: "preparation (n) = chuẩn bị\nretirement (n) = nghỉ hưu",
+                explanation: "Đáp án đúng: 'recruit'. Câu này nói về việc tuyển dụng.",
+                translation: "Để chuẩn bị cho việc nghỉ hưu của ông Kumar vào cuối tháng Ba, Công ty Carolex sẽ cần tuyển dụng một giám đốc cơ sở mới."
+            },
+            {
+                question: "The team's contributions to the Ripton Group's marketing plan were very ____ acknowledged.",
+                options: ["favor", "favorably", "favorable", "favored"],
+                correct: 1,
+                vocab: "contributions (n) = đóng góp\nmarketing plan (n) = kế hoạch tiếp thị",
+                explanation: "Đáp án đúng: 'favorably'. Câu này sử dụng trạng từ để mô tả cách thức.",
+                translation: "Các đóng góp của nhóm cho kế hoạch tiếp thị của Ripton Group đã được công nhận rất tích cực."
+            },
+            {
+                question: "____ receiving the engineering award, Ms. Kwon made a point of thanking longtime mentors.",
+                options: ["Onto", "Unlike", "About", "Upon"],
+                correct: 3,
+                vocab: "receiving (v) = nhận\naward (n) = giải thưởng",
+                explanation: "Đáp án đúng: 'Upon'. 'Upon receiving' có nghĩa là 'khi nhận được'.",
+                translation: "Khi nhận giải thưởng kỹ thuật, cô Kwon đã nhấn mạnh việc cảm ơn những người hướng dẫn lâu năm."
+            },
+            {
+                question: "Please read the list of ____ qualifications to ensure that you have the necessary education and experience for the position.",
+                options: ["slight", "equal", "obliged", "essential"],
+                correct: 3,
+                vocab: "qualifications (n) = bằng cấp\neducation (n) = giáo dục",
+                explanation: "Đáp án đúng: 'essential'. 'Essential qualifications' có nghĩa là 'bằng cấp cần thiết'.",
+                translation: "Vui lòng đọc danh sách các bằng cấp cần thiết để đảm bảo rằng bạn có trình độ giáo dục và kinh nghiệm cần thiết cho vị trí này."
+            },
+            {
+                question: "Choosing the best software tool to eliminate computer viruses is rarely simple, ____ it is important to seek expert advice.",
+                options: ["why", "then", "nor", "so"],
+                correct: 3,
+                vocab: "choosing (v) = chọn lựa\nsoftware tool (n) = công cụ phần mềm",
+                explanation: "Đáp án đúng: 'so'. Câu này sử dụng 'so' để chỉ ra mối quan hệ nguyên nhân-kết quả.",
+                translation: "Việc chọn công cụ phần mềm tốt nhất để loại bỏ virus máy tính hiếm khi đơn giản, vì vậy điều quan trọng là tìm kiếm lời khuyên từ chuyên gia."
+            },
+            {
+                question: "Ms. Delgado would like to meet with all loan officers ____ reviewing any more loan applications.",
+                options: ["now that", "as though", "before", "often"],
+                correct: 2,
+                vocab: "meet (v) = gặp gỡ\nloan officers (n) = nhân viên cho vay",
+                explanation: "Đáp án đúng: 'before'. Câu này nói về việc gặp gỡ trước khi làm điều gì đó.",
+                translation: "Cô Delgado muốn gặp tất cả các nhân viên cho vay trước khi xem xét bất kỳ đơn xin vay nào nữa."
+            },
+            {
+                question: "Cedar Branch Hill has a ____ as a business-friendly environment that provides efficient licensing and other legal processes.",
+                options: ["prediction", "courtesy", "reputation", "statement"],
+                correct: 2,
+                vocab: "business-friendly (adj) = thân thiện với doanh nghiệp\nenvironment (n) = môi trường",
+                explanation: "Đáp án đúng: 'reputation'. 'Reputation as a business-friendly environment' có nghĩa là 'danh tiếng như một môi trường thân thiện với doanh nghiệp'.",
+                translation: "Cedar Branch Hill có danh tiếng như một môi trường thân thiện với doanh nghiệp, cung cấp các quy trình cấp phép và pháp lý hiệu quả."
+            },
+            {
+                question: "The actors held an additional rehearsal ____ perfect their performance in the final scene.",
+                options: ["considerably", "in order to", "nevertheless", "as a result of"],
+                correct: 1,
+                vocab: "rehearsal (n) = buổi tập dượt\nperformance (n) = màn trình diễn",
+                explanation: "Đáp án đúng: 'in order to'. Câu này diễn tả mục đích.",
+                translation: "Các diễn viên đã tổ chức một buổi tập dượt bổ sung để hoàn thiện màn trình diễn của họ trong cảnh cuối."
+            },
+            {
+                question: "RZT Technology will double the size of its Toronto laboratory to ____ the organization's rapid growth.",
+                options: ["assign", "investigate", "experience", "accommodate"],
+                correct: 3,
+                vocab: "double (v) = gấp đôi\nlaboratory (n) = phòng thí nghiệm",
+                explanation: "Đáp án đúng: 'accommodate'. Câu này nói về việc đáp ứng nhu cầu.",
+                translation: "RZT Technology sẽ gấp đôi kích thước phòng thí nghiệm Toronto của mình để đáp ứng sự phát triển nhanh chóng của tổ chức."
+            },
+            {
+                question: "Even though Smithton Electronics' second quarter was not ____, the company plans to invest large sums on research.",
+                options: ["profitable", "profiting", "profitability", "profitably"],
+                correct: 0,
+                vocab: "profitable (adj) = có lợi\ninvest (v) = đầu tư",
+                explanation: "Đáp án đúng: 'profitable'. Câu này nói về tình hình tài chính.",
+                translation: "Mặc dù quý hai của Smithton Electronics không có lợi, công ty vẫn có kế hoạch đầu tư số tiền lớn vào nghiên cứu."
+            },
+            {
+                question: "The Williamsport Hotel is an ideal venue for the conference because of its ____ to the airport.",
+                options: ["achievement", "proximity", "competence", "exception"],
+                correct: 1,
+                vocab: "venue (n) = địa điểm\nconference (n) = hội nghị",
+                explanation: "Đáp án đúng: 'proximity'. 'Proximity to the airport' có nghĩa là 'gần sân bay'.",
+                translation: "Khách sạn Williamsport là một địa điểm lý tưởng cho hội nghị vì gần sân bay."
+            },
+            {
+                question: "The second training session is for employees ____ responsibilities include processing payroll forms.",
+                options: ["whose", "which", "what", "who"],
+                correct: 0,
+                vocab: "training session (n) = buổi đào tạo\nresponsibilities (n) = trách nhiệm",
+                explanation: "Đáp án đúng: 'whose'. 'Employees whose responsibilities' có nghĩa là 'các nhân viên có trách nhiệm'.",
+                translation: "Buổi đào tạo thứ hai dành cho các nhân viên có trách nhiệm xử lý các mẫu bảng lương."
+            },
+            {
+                question: "____ poorly the high-speed printer may be functioning, it is still making copies that are adequate for our purposes.",
+                options: ["Rather", "Seldom", "However", "Thoroughly"],
+                correct: 2,
+                vocab: "printer (n) = máy in\nfunctioning (v) = hoạt động",
+                explanation: "Đáp án đúng: 'However'. Câu này diễn tả sự tương phản.",
+                translation: "Dù máy in tốc độ cao có thể hoạt động kém, nó vẫn đang tạo ra các bản sao đủ cho mục đích của chúng tôi."
+            },
+            {
+                question: "The long-awaited Weka 2XG digital camera will finally be ____ at a product exhibition on August 16.",
+                options: ["reduced", "unveiled", "consulted", "resolved"],
+                correct: 1,
+                vocab: "digital camera (n) = máy ảnh kỹ thuật số\nexhibition (n) = triển lãm",
+                explanation: "Đáp án đúng: 'unveiled'. 'Unveiled at a product exhibition' có nghĩa là 'được ra mắt tại một triển lãm sản phẩm'.",
+                translation: "Chiếc máy ảnh kỹ thuật số Weka 2XG được mong đợi từ lâu cuối cùng sẽ được ra mắt tại một triển lãm sản phẩm vào ngày 16 tháng 8."
+            },
+            {
+                question: "Northeast Community Finance ____ an online system in order to shorten service lines at branch locations.",
+                options: ["has implemented", "to be implementing", "to have been implementing", "is implemented"],
+                correct: 0,
+                vocab: "finance (n) = tài chính\nsystem (n) = hệ thống",
+                explanation: "Đáp án đúng: 'has implemented'. Câu này sử dụng thì hiện tại hoàn thành.",
+                translation: "Northeast Community Finance đã triển khai một hệ thống trực tuyến nhằm rút ngắn thời gian phục vụ tại các chi nhánh."
+            }
+        ];
+
+        let score = 0;
+        const quizContainer = document.getElementById("quiz");
+        
+        function loadQuiz() {
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.classList.add("question-block");
+                questionDiv.innerHTML = `
+                    <p class="question">${index + 1}. ${q.question}</p>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <label>
+                                <input type="radio" name="q${index}" value="${i}" onclick="checkAnswer(${index}, ${i})"> ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <p class="result" id="result-${index}"></p>
+                `;
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+        
+        function checkAnswer(qIndex, selected) {
+            const resultDiv = document.getElementById(`result-${qIndex}`);
+            const question = questions[qIndex];
+            const options = document.getElementsByName(`q${qIndex}`);
+            
+            options.forEach(option => option.disabled = true);
+            
+            if (selected == question.correct) {
+                score++;
+                resultDiv.innerHTML = `<span style='color:green;'>✔ Đúng!</span><br><strong>Từ vựng:</strong><br>${question.vocab.replace(/\n/g, '<br>')}<br><strong>Giải thích:</strong> ${question.explanation}<br><strong>Dịch:</strong> ${question.translation}`;
+            } else {
+                resultDiv.innerHTML = `<span style='color:red;'>✘ Sai!</span><br><strong>Từ vựng:</strong><br>${question.vocab.replace(/\n/g, '<br>')}<br><strong>Giải thích:</strong> ${question.explanation}<br><strong>Dịch:</strong> ${question.translation}`;
+            }
+            document.getElementById("score").innerText = `Số câu đúng: ${score} / ${questions.length}`;
+        }
+        
+        loadQuiz();
+    </script>
+</body>
+</html>

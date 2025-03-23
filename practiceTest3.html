@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRACTICE TEST 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            padding: 5px;
+            background: #e0e0e0;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .summary {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>PRACTICE TEST 3</h2>
+        <div id="quiz"></div>
+        <p class="summary" id="score"></p>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "York Development Corporation marked the ____ of the Ford Road office complex with a ribbon-cutting ceremony.",
+                options: ["opens", "opening", "opened", "openly"],
+                correct: 1,
+                vocab: "marked (v) = đánh dấu\nribbon-cutting ceremony (n) = lễ cắt băng khánh thành",
+                explanation: "Đáp án đúng: 'opening'. 'The opening' là cụm từ chỉ sự khai trương.",
+                translation: "Công ty York Development đã đánh dấu lễ khai trương của tổ hợp văn phòng Ford Road bằng một buổi lễ cắt băng khánh thành."
+            },
+            {
+                question: "Staff at the Bismarck Hotel were ____ helpful to us during our stay.",
+                options: ["quite", "enough", "far", "early"],
+                correct: 0,
+                vocab: "staff (n) = nhân viên\nhelpful (adj) = hữu ích",
+                explanation: "Đáp án đúng: 'quite'. 'Quite helpful' có nghĩa là 'rất hữu ích'.",
+                translation: "Nhân viên tại khách sạn Bismarck đã rất hữu ích với chúng tôi trong suốt thời gian lưu trú."
+            },
+            {
+                question: "Ms. Luke will explain some possible consequences of the ____ merger with the Wilson-Peek Corporation.",
+                options: ["proposed", "proposal", "proposition", "proposing"],
+                correct: 0,
+                vocab: "consequences (n) = hậu quả\nmerger (n) = sự sáp nhập",
+                explanation: "Đáp án đúng: 'proposed'. 'Proposed merger' có nghĩa là 'sự sáp nhập được đề xuất'.",
+                translation: "Cô Luke sẽ giải thích một số hậu quả có thể xảy ra của sự sáp nhập được đề xuất với công ty Wilson-Peek."
+            },
+            {
+                question: "The Springdale supermarket survey ____ will be released a week after they are evaluated.",
+                options: ["events", "stores", "results", "coupons"],
+                correct: 2,
+                vocab: "survey (n) = khảo sát\nresults (n) = kết quả",
+                explanation: "Đáp án đúng: 'results'. 'Survey results' có nghĩa là 'kết quả khảo sát'.",
+                translation: "Kết quả khảo sát của siêu thị Springdale sẽ được công bố một tuần sau khi chúng được đánh giá."
+            },
+            {
+                question: "The new printer operates more ____ than the previous model did.",
+                options: ["quickest", "quickness", "quick", "quickly"],
+                correct: 3,
+                vocab: "printer (n) = máy in\noperates (v) = hoạt động",
+                explanation: "Đáp án đúng: 'quickly'. 'Operates quickly' có nghĩa là 'hoạt động nhanh hơn'.",
+                translation: "Máy in mới hoạt động nhanh hơn so với mẫu trước đó."
+            },
+            {
+                question: "Here at Vanguard Buying Club, ____ help members find quality merchandise at the lowest possible prices.",
+                options: ["us", "our", "we", "ourselves"],
+                correct: 2,
+                vocab: "help (v) = giúp\nmembers (n) = thành viên",
+                explanation: "Đáp án đúng: 'we'. 'We help' có nghĩa là 'chúng tôi giúp'.",
+                translation: "Tại Vanguard Buying Club, chúng tôi giúp các thành viên tìm kiếm hàng hóa chất lượng với giá thấp nhất có thể."
+            },
+            {
+                question: "Management announced that all salespeople would be receiving a bonus this year, ____ in time for summer vacations.",
+                options: ["just", "as", "only", "by"],
+                correct: 3,
+                vocab: "management (n) = ban quản lý\nbonus (n) = tiền thưởng",
+                explanation: "Đáp án đúng: 'by'. 'By in time' có nghĩa là 'kịp thời'.",
+                translation: "Ban quản lý đã thông báo rằng tất cả nhân viên bán hàng sẽ nhận được tiền thưởng trong năm nay, kịp thời cho kỳ nghỉ hè."
+            },
+            {
+                question: "According to Florida Digital Designer Magazine, many graphic designers do not consider ____ to be traditional artists.",
+                options: ["it", "their", "themselves", "itself"],
+                correct: 2,
+                vocab: "graphic designers (n) = nhà thiết kế đồ họa\nconsider (v) = xem xét",
+                explanation: "Đáp án đúng: 'themselves'. 'Consider themselves' có nghĩa là 'xem mình là'.",
+                translation: "Theo tạp chí Florida Digital Designer, nhiều nhà thiết kế đồ họa không xem mình là những nghệ sĩ truyền thống."
+            },
+            {
+                question: "A wooden bridge crossing the wading pond ____ to the hotel's nine-hole golf course.",
+                options: ["prepares", "leads", "presents", "takes"],
+                correct: 1,
+                vocab: "bridge (n) = cầu\ncrossing (v) = băng qua",
+                explanation: "Đáp án đúng: 'leads'. 'Leads to' có nghĩa là 'dẫn đến'.",
+                translation: "Một cây cầu gỗ băng qua hồ nước dẫn đến sân golf chín lỗ của khách sạn."
+            },
+            {
+                question: "A special sale on stationery ____ on the Write Things Web site yesterday.",
+                options: ["was announced", "announced", "was announcing", "to announce"],
+                correct: 0,
+                vocab: "sale (n) = đợt giảm giá\nstationery (n) = văn phòng phẩm",
+                explanation: "Đáp án đúng: 'was announced'. Câu này cần một động từ bị động.",
+                translation: "Một đợt giảm giá đặc biệt về văn phòng phẩm đã được thông báo trên trang web Write Things hôm qua."
+            },
+            {
+                question: "All produce transported by Gocargo Trucking is refrigerated ____ upon pickup to prevent spoilage.",
+                options: ["lately", "promptly", "potentially", "clearly"],
+                correct: 1,
+                vocab: "produce (n) = sản phẩm nông sản\nrefrigerated (v) = làm lạnh",
+                explanation: "Đáp án đúng: 'promptly'. 'Promptly refrigerated' có nghĩa là 'được làm lạnh ngay lập tức'.",
+                translation: "Tất cả sản phẩm nông sản được vận chuyển bởi Gocargo Trucking đều được làm lạnh ngay lập tức khi lấy hàng để ngăn ngừa hư hỏng."
+            },
+            {
+                question: "The Ferrera Museum plans to exhibit a collection of Lucia Almeida's most ____ sculptures.",
+                options: ["innovative", "innovation", "innovatively", "innovate"],
+                correct: 0,
+                vocab: "exhibit (v) = trưng bày\ncollection (n) = bộ sưu tập",
+                explanation: "Đáp án đúng: 'innovative'. 'Innovative sculptures' có nghĩa là 'các tác phẩm điêu khắc sáng tạo'.",
+                translation: "Bảo tàng Ferrera dự định trưng bày một bộ sưu tập các tác phẩm điêu khắc sáng tạo nhất của Lucia Almeida."
+            },
+            {
+                question: "The bank's cashier windows are open daily from 8:00 A.M. to 4:00 P.M. ____ on weekends.",
+                options: ["except", "until", "nor", "yet"],
+                correct: 0,
+                vocab: "cashier (n) = nhân viên thu ngân\nwindows (n) = cửa sổ",
+                explanation: "Đáp án đúng: 'except'. 'Except on weekends' có nghĩa là 'trừ vào cuối tuần'.",
+                translation: "Các cửa sổ thu ngân của ngân hàng mở cửa hàng ngày từ 8:00 sáng đến 4:00 chiều, trừ vào cuối tuần."
+            },
+            {
+                question: "Inventory control and warehousing strategies ____ within the responsibilities of the supply chain manager.",
+                options: ["have", "cover", "mark", "fall"],
+                correct: 3,
+                vocab: "inventory control (n) = kiểm soát hàng tồn kho\nwarehousing (n) = kho bãi",
+                explanation: "Đáp án đúng: 'fall'. 'Fall within' có nghĩa là 'thuộc về'.",
+                translation: "Các chiến lược kiểm soát hàng tồn kho và kho bãi thuộc về trách nhiệm của người quản lý chuỗi cung ứng."
+            },
+            {
+                question: "Of all the truck models available today, it can be difficult to figure out ____ would best suit your company's needs.",
+                options: ["when", "why", "which", "where"],
+                correct: 2,
+                vocab: "truck (n) = xe tải\nmodels (n) = mẫu",
+                explanation: "Đáp án đúng: 'which'. 'Which' được dùng để chỉ ra sự lựa chọn.",
+                translation: "Trong số tất cả các mẫu xe tải hiện có ngày nay, thật khó để xác định mẫu nào phù hợp nhất với nhu cầu của công ty bạn."
+            },
+            {
+                question: "CEO Yoshiro Kasai has expressed complete faith in Fairway Maritime's ____ to deliver the product on time.",
+                options: ["belief", "measure", "problem", "ability"],
+                correct: 3,
+                vocab: "expressed (v) = bày tỏ\nfaith (n) = niềm tin",
+                explanation: "Đáp án đúng: 'ability'. 'Ability to deliver' có nghĩa là 'khả năng giao hàng'.",
+                translation: "Giám đốc điều hành Yoshiro Kasai đã bày tỏ niềm tin hoàn toàn vào khả năng giao hàng đúng hạn của Fairway Maritime."
+            },
+            {
+                question: "At Derwin Securities, trainees alternate ____ attending information sessions and working closely with assigned mentors.",
+                options: ["along", "against", "between", "near"],
+                correct: 2,
+                vocab: "trainees (n) = thực tập sinh\nalternate (v) = luân phiên",
+                explanation: "Đáp án đúng: 'between'. 'Alternate between' có nghĩa là 'luân phiên giữa'.",
+                translation: "Tại Derwin Securities, các thực tập sinh luân phiên giữa việc tham gia các buổi thông tin và làm việc chặt chẽ với các cố vấn được chỉ định."
+            },
+            {
+                question: "Company Vice President Astrid Barretto had no ____ to being considered for the position of CEO.",
+                options: ["objected", "objecting", "objects", "objection"],
+                correct: 3,
+                vocab: "objection (n) = sự phản đối\nconsidered (v) = được xem xét",
+                explanation: "Đáp án đúng: 'objection'. 'No objection' có nghĩa là 'không có sự phản đối'.",
+                translation: "Phó giám đốc công ty Astrid Barretto không có sự phản đối nào khi được xem xét cho vị trí giám đốc điều hành."
+            },
+            {
+                question: "Belinda McKay fans who are ____ to the author's formal writing style will be surprised by her latest biography.",
+                options: ["fortunate", "readable", "comparable", "accustomed"],
+                correct: 3,
+                vocab: "fans (n) = người hâm mộ\nwriting style (n) = phong cách viết",
+                explanation: "Đáp án đúng: 'accustomed'. 'Accustomed to' có nghĩa là 'quen với'.",
+                translation: "Những người hâm mộ Belinda McKay quen với phong cách viết trang trọng của tác giả sẽ ngạc nhiên bởi tiểu sử mới nhất của cô."
+            },
+            {
+                question: "The Southeast Asia Business Convention feature will ____ known and respected leaders from countries across the region.",
+                options: ["widen", "wider", "widely", "wide"],
+                correct: 2,
+                vocab: "feature (v) = có\nleaders (n) = lãnh đạo",
+                explanation: "Đáp án đúng: 'widely'. 'Widely known' có nghĩa là 'được biết đến rộng rãi'.",
+                translation: "Chương trình của Hội nghị Kinh doanh Đông Nam Á sẽ có những lãnh đạo nổi tiếng và được tôn trọng từ các quốc gia trong khu vực."
+            },
+            {
+                question: "____ the high cost of fuel, customers are buying smaller, more efficient cars.",
+                options: ["Together with", "Instead of", "As well as", "Because of"],
+                correct: 3,
+                vocab: "high cost (n) = chi phí cao\ncustomers (n) = khách hàng",
+                explanation: "Đáp án đúng: 'Because of'. 'Because of the high cost' có nghĩa là 'vì chi phí cao'.",
+                translation: "Vì chi phí cao của nhiên liệu, khách hàng đang mua những chiếc xe nhỏ hơn, hiệu quả hơn."
+            },
+            {
+                question: "Over the past ten years, Bellworth Medical Clinic ____ Atlan Protection officers for all security needs.",
+                options: ["is hiring", "were hiring", "has hired", "was hired"],
+                correct: 2,
+                vocab: "medical clinic (n) = phòng khám y tế\nsecurity needs (n) = nhu cầu an ninh",
+                explanation: "Đáp án đúng: 'has hired'. 'Has hired' có nghĩa là 'đã thuê'.",
+                translation: "Trong suốt mười năm qua, Phòng khám Y tế Bellworth đã thuê các nhân viên bảo vệ Atlan cho tất cả các nhu cầu an ninh."
+            },
+            {
+                question: "The driver will make three ____ to deliver the package before it is returned to our warehouse.",
+                options: ["attempts", "pursuits", "aims", "experiences"],
+                correct: 0,
+                vocab: "driver (n) = tài xế\npackage (n) = gói hàng",
+                explanation: "Đáp án đúng: 'attempts'. 'Make attempts' có nghĩa là 'thực hiện các nỗ lực'.",
+                translation: "Tài xế sẽ thực hiện ba nỗ lực để giao gói hàng trước khi nó được trả lại kho của chúng tôi."
+            },
+            {
+                question: "We congratulate all Riverside employees, whose ____ effort has resulted in a 20 percent reduction in waste disposal costs.",
+                options: ["collect", "collective", "collects", "collector"],
+                correct: 1,
+                vocab: "effort (n) = nỗ lực\nreduction (n) = sự giảm",
+                explanation: "Đáp án đúng: 'collective'. 'Collective effort' có nghĩa là 'nỗ lực tập thể'.",
+                translation: "Chúng tôi chúc mừng tất cả nhân viên Riverside, nỗ lực tập thể của họ đã dẫn đến việc giảm 20% chi phí xử lý chất thải."
+            },
+            {
+                question: "Andrzej Ptak's photography Website will be available online ____ we have finished organizing and cataloging his work.",
+                options: ["how", "once", "so too", "not only"],
+                correct: 1,
+                vocab: "available (adj) = có sẵn\ncataloging (v) = phân loại",
+                explanation: "Đáp án đúng: 'once'. 'Once we have finished' có nghĩa là 'khi chúng tôi đã hoàn thành'.",
+                translation: "Website nhiếp ảnh của Andrzej Ptak sẽ có sẵn trực tuyến khi chúng tôi đã hoàn thành việc tổ chức và phân loại công việc của anh ấy."
+            },
+            {
+                question: "The initial feedback from early buyers of the Sunbell XC2 mobile phone indicates that they found it ____ to use.",
+                options: ["conveniences", "conveniently", "convenience", "convenient"],
+                correct: 3,
+                vocab: "feedback (n) = phản hồi\nmobile phone (n) = điện thoại di động",
+                explanation: "Đáp án đúng: 'convenient'. 'Convenient to use' có nghĩa là 'dễ sử dụng'.",
+                translation: "Phản hồi ban đầu từ những người mua sớm điện thoại di động Sunbell XC2 cho thấy họ thấy nó dễ sử dụng."
+            },
+            {
+                question: "____ space in the bathroom was limited, the contractor managed to fit in two sinks and a shower.",
+                options: ["Both", "So that", "Whether", "Even though"],
+                correct: 3,
+                vocab: "space (n) = không gian\ncontractor (n) = nhà thầu",
+                explanation: "Đáp án đúng: 'Even though'. 'Even though space was limited' có nghĩa là 'mặc dù không gian bị hạn chế'.",
+                translation: "Mặc dù không gian trong phòng tắm bị hạn chế, nhà thầu đã quản lý để lắp đặt hai bồn rửa và một vòi sen."
+            },
+            {
+                question: "The staff must ____ as much market-research data as possible before planning the advertising campaign.",
+                options: ["equip", "compile", "endorse", "compose"],
+                correct: 1,
+                vocab: "staff (n) = nhân viên\nmarket-research data (n) = dữ liệu nghiên cứu thị trường",
+                explanation: "Đáp án đúng: 'compile'. 'Must compile' có nghĩa là 'phải thu thập'.",
+                translation: "Nhân viên phải thu thập càng nhiều dữ liệu nghiên cứu thị trường càng tốt trước khi lập kế hoạch cho chiến dịch quảng cáo."
+            },
+            {
+                question: "____ a national holiday falls on a Thursday, the Barstow Company allows employees to take off Friday as well.",
+                options: ["Even", "For", "Nearly", "Whenever"],
+                correct: 3,
+                vocab: "national holiday (n) = ngày lễ quốc gia\nemployees (n) = nhân viên",
+                explanation: "Đáp án đúng: 'Whenever'. 'Whenever a national holiday falls' có nghĩa là 'bất cứ khi nào một ngày lễ quốc gia rơi vào'.",
+                translation: "Bất cứ khi nào một ngày lễ quốc gia rơi vào thứ Năm, công ty Barstow cho phép nhân viên nghỉ thứ Sáu."
+            },
+            {
+                question: "____ materials for the advanced Farsi course include an audio CD and a DVD.",
+                options: ["Supplementary", "Consequential", "Persistent", "Cooperative"],
+                correct: 0,
+                vocab: "materials (n) = tài liệu\nadvanced (adj) = nâng cao",
+                explanation: "Đáp án đúng: 'Supplementary'. 'Supplementary materials' có nghĩa là 'tài liệu bổ sung'.",
+                translation: "Tài liệu bổ sung cho khóa học Farsi nâng cao bao gồm một đĩa CD âm thanh và một đĩa DVD."
+            }
+        ];
+
+        let score = 0;
+        const quizContainer = document.getElementById("quiz");
+        
+        function loadQuiz() {
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.classList.add("question-block");
+                questionDiv.innerHTML = `
+                    <p class="question">${index + 1}. ${q.question}</p>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <label>
+                                <input type="radio" name="q${index}" value="${i}" onclick="checkAnswer(${index}, ${i})"> ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <p class="result" id="result-${index}"></p>
+                `;
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+        
+        function checkAnswer(qIndex, selected) {
+            const resultDiv = document.getElementById(`result-${qIndex}`);
+            const question = questions[qIndex];
+            const options = document.getElementsByName(`q${qIndex}`);
+            
+            options.forEach(option => option.disabled = true);
+            
+            if (selected == question.correct) {
+                score++;
+                resultDiv.innerHTML = `<span style='color:green;'>✔ Đúng!</span><br><strong>Từ vựng:</strong><br>${question.vocab.replace(/\n/g, '<br>')}<br><strong>Giải thích:</strong> ${question.explanation}<br><strong>Dịch:</strong> ${question.translation}`;
+            } else {
+                resultDiv.innerHTML = `<span style='color:red;'>✘ Sai!</span><br><strong>Từ vựng:</strong><br>${question.vocab.replace(/\n/g, '<br>')}<br><strong>Giải thích:</strong> ${question.explanation}<br><strong>Dịch:</strong> ${question.translation}`;
+            }
+            document.getElementById("score").innerText = `Số câu đúng: ${score} / ${questions.length}`;
+        }
+        
+        loadQuiz();
+    </script>
+</body>
+</html>

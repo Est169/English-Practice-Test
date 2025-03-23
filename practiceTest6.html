@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRACTICE TEST 6</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            padding: 5px;
+            background: #e0e0e0;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .summary {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>PRACTICE TEST 6</h2>
+        <div id="quiz"></div>
+        <p class="summary" id="score"></p>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Jesper Associates currently has ------- with different food suppliers.",
+                options: ["contracting", "contracts", "contractor", "contract"],
+                correct: 1,
+                vocab: "contracts (n) = hợp đồng\nfood suppliers (n) = nhà cung cấp thực phẩm",
+                explanation: "Đáp án đúng: 'contracts'. 'Has contracts' có nghĩa là 'có hợp đồng'.",
+                translation: "Jesper Associates hiện có các hợp đồng với các nhà cung cấp thực phẩm khác nhau."
+            },
+            {
+                question: "Passengers must be at the gate -------- 25 minutes prior to boarding their flight.",
+                options: ["at least", "as much", "in case", "by then"],
+                correct: 0,
+                vocab: "passengers (n) = hành khách\ngate (n) = cổng",
+                explanation: "Đáp án đúng: 'at least'. 'At least 25 minutes' có nghĩa là 'ít nhất 25 phút'.",
+                translation: "Hành khách phải có mặt tại cổng ít nhất 25 phút trước khi lên máy bay."
+            },
+            {
+                question: "Deltran analytics software can help ------ identify issues, predict trends, and improve business.",
+                options: ["you", "your", "yours", "yourself"],
+                correct: 0,
+                vocab: "analytics software (n) = phần mềm phân tích\nidentify (v) = xác định",
+                explanation: "Đáp án đúng: 'you'. 'Help you identify' có nghĩa là 'giúp bạn xác định'.",
+                translation: "Phần mềm phân tích Deltran có thể giúp bạn xác định các vấn đề, dự đoán xu hướng và cải thiện kinh doanh."
+            },
+            {
+                question: "The technology department ------- to purchase three new servers next year.",
+                options: ["announces", "thinks", "predicts", "plans"],
+                correct: 3,
+                vocab: "technology department (n) = bộ phận công nghệ\nservers (n) = máy chủ",
+                explanation: "Đáp án đúng: 'plans'. 'Plans to purchase' có nghĩa là 'dự định mua'.",
+                translation: "Bộ phận công nghệ dự định mua ba máy chủ mới vào năm tới."
+            },
+            {
+                question: "Jennson Motors hired an ------- new efficiency expert last month.",
+                options: ["approximate", "angular", "exceptional", "eventual"],
+                correct: 2,
+                vocab: "efficiency expert (n) = chuyên gia hiệu suất\nhired (v) = đã thuê",
+                explanation: "Đáp án đúng: 'exceptional'. 'An exceptional expert' có nghĩa là 'một chuyên gia xuất sắc'.",
+                translation: "Jennson Motors đã thuê một chuyên gia hiệu suất xuất sắc vào tháng trước."
+            },
+            {
+                question: "Mr. Winkel's ------- responsibilities include auditing and financial review of large clients.",
+                options: ["accounts", "accounted", "accounting", "accountable"],
+                correct: 2,
+                vocab: "responsibilities (n) = trách nhiệm\nauditing (v) = kiểm toán",
+                explanation: "Đáp án đúng: 'accounting'. 'Accounting responsibilities' có nghĩa là 'trách nhiệm kế toán'.",
+                translation: "Trách nhiệm kế toán của ông Winkel bao gồm kiểm toán và đánh giá tài chính của các khách hàng lớn."
+            },
+            {
+                question: "The prime minister greeted foreign diplomats ----- a luncheon today in London.",
+                options: ["at", "had", "such", "where"],
+                correct: 0,
+                vocab: "prime minister (n) = thủ tướng\ndiplomats (n) = nhà ngoại giao",
+                explanation: "Đáp án đúng: 'at'. 'Greeted at a luncheon' có nghĩa là 'chào đón tại một bữa tiệc trưa'.",
+                translation: "Thủ tướng đã chào đón các nhà ngoại giao nước ngoài tại một bữa tiệc trưa hôm nay ở London."
+            },
+            {
+                question: "The management team at Otto Corporation offers incentives ------- employee productivity.",
+                options: ["stimulate", "to stimulate", "will stimulate", "are stimulating"],
+                correct: 1,
+                vocab: "management team (n) = đội ngũ quản lý\nincentives (n) = động lực",
+                explanation: "Đáp án đúng: 'to stimulate'. 'Offers incentives to stimulate' có nghĩa là 'cung cấp động lực để kích thích'.",
+                translation: "Đội ngũ quản lý tại Otto Corporation cung cấp động lực để kích thích năng suất của nhân viên."
+            },
+            {
+                question: "In response to customer ----- , Lopez Naturals will release a line of organic soaps.",
+                options: ["demand", "permit", "arrival", "account"],
+                correct: 0,
+                vocab: "response (n) = phản hồi\norganic soaps (n) = xà phòng hữu cơ",
+                explanation: "Đáp án đúng: 'demand'. 'Customer demand' có nghĩa là 'nhu cầu của khách hàng'.",
+                translation: "Để đáp ứng nhu cầu của khách hàng, Lopez Naturals sẽ phát hành một dòng xà phòng hữu cơ."
+            },
+            {
+                question: "Before the computers leave the factory, they are ----- thoroughly to ensure they have no defects.",
+                options: ["selected", "inspected", "attached", "managed"],
+                correct: 1,
+                vocab: "computers (n) = máy tính\nfactory (n) = nhà máy",
+                explanation: "Đáp án đúng: 'inspected'. 'Are inspected thoroughly' có nghĩa là 'được kiểm tra kỹ lưỡng'.",
+                translation: "Trước khi máy tính rời khỏi nhà máy, chúng được kiểm tra kỹ lưỡng để đảm bảo không có khuyết điểm."
+            },
+            {
+                question: "WRUZ Radio will broadcast a new show ----- to business news and economic analysis.",
+                options: ["allowed", "prepared", "dedicated", "introduced"],
+                correct: 2,
+                vocab: "broadcast (v) = phát sóng\nbusiness news (n) = tin tức kinh doanh",
+                explanation: "Đáp án đúng: 'dedicated'. 'Dedicated to business news' có nghĩa là 'dành riêng cho tin tức kinh doanh'.",
+                translation: "WRUZ Radio sẽ phát sóng một chương trình mới dành riêng cho tin tức kinh doanh và phân tích kinh tế."
+            },
+            {
+                question: "Mr. Okada met ----- with the building manager to discuss the demolition project.",
+                options: ["frequent", "frequenting", "frequently", "frequented"],
+                correct: 2,
+                vocab: "building manager (n) = quản lý tòa nhà\ndemolition project (n) = dự án phá dỡ",
+                explanation: "Đáp án đúng: 'frequently'. 'Met frequently' có nghĩa là 'gặp gỡ thường xuyên'.",
+                translation: "Ông Okada đã gặp gỡ thường xuyên với quản lý tòa nhà để thảo luận về dự án phá dỡ."
+            },
+            {
+                question: "Mr. Montri politely ----- the job offer from Barranca Shipping Company.",
+                options: ["declined", "decreased", "prevented", "converted"],
+                correct: 0,
+                vocab: "job offer (n) = đề nghị công việc\npolitely (adv) = một cách lịch sự",
+                explanation: "Đáp án đúng: 'declined'. 'Politely declined' có nghĩa là 'từ chối một cách lịch sự'.",
+                translation: "Ông Montri đã từ chối một cách lịch sự đề nghị công việc từ công ty Barranca Shipping."
+            },
+            {
+                question: "Written permission must ----- before using Thavor Corporation’s logo.",
+                options: ["to obtain", "obtained", "be obtained", "obtaining"],
+                correct: 2,
+                vocab: "written permission (n) = sự cho phép bằng văn bản\nlogo (n) = biểu tượng",
+                explanation: "Đáp án đúng: 'be obtained'. 'Must be obtained' có nghĩa là 'phải được lấy'.",
+                translation: "Sự cho phép bằng văn bản phải được lấy trước khi sử dụng biểu tượng của Thavor Corporation."
+            },
+            {
+                question: "----- it is relatively small, the fitness center at Ginder Apartments is very popular with residents.",
+                options: ["Reasoning", "Essentially", "Although", "Throughout"],
+                correct: 2,
+                vocab: "fitness center (n) = trung tâm thể dục\nresidents (n) = cư dân",
+                explanation: "Đáp án đúng: 'Although'. 'Although it is small' có nghĩa là 'mặc dù nó nhỏ'.",
+                translation: "Mặc dù trung tâm thể dục tại Ginder Apartments tương đối nhỏ, nhưng nó rất phổ biến với cư dân."
+            },
+            {
+                question: "All communications must be approved by the public relations director before they can be shared -----.",
+                options: ["certainly", "externally", "deeply", "utterly"],
+                correct: 1,
+                vocab: "communications (n) = thông tin liên lạc\npublic relations director (n) = giám đốc quan hệ công chúng",
+                explanation: "Đáp án đúng: 'externally'. 'Shared externally' có nghĩa là 'được chia sẻ ra bên ngoài'.",
+                translation: "Tất cả thông tin liên lạc phải được phê duyệt bởi giám đốc quan hệ công chúng trước khi chúng có thể được chia sẻ ra bên ngoài."
+            },
+            {
+                question: "Providing precision welding to a ----- array of industries, Mistone Metalworks recently celebrated a century of service in Quebec.",
+                options: ["widely", "widen", "width", "wide"],
+                correct: 3,
+                vocab: "precision welding (n) = hàn chính xác\nindustries (n) = ngành công nghiệp",
+                explanation: "Đáp án đúng: 'wide'. 'Wide array of industries' có nghĩa là 'một loạt các ngành công nghiệp'.",
+                translation: "Cung cấp hàn chính xác cho một loạt các ngành công nghiệp, Mistone Metalworks gần đây đã kỷ niệm một thế kỷ phục vụ tại Quebec."
+            },
+            {
+                question: "Mr. Kim considers punctuality a crucial ----- for all his assistants to have.",
+                options: ["device", "type", "action", "trait"],
+                correct: 3,
+                vocab: "punctuality (n) = sự đúng giờ\nassistants (n) = trợ lý",
+                explanation: "Đáp án đúng: 'trait'. 'A crucial trait' có nghĩa là 'một đặc điểm quan trọng'.",
+                translation: "Ông Kim coi sự đúng giờ là một đặc điểm quan trọng mà tất cả các trợ lý của ông cần có."
+            },
+            {
+                question: "The chief financial officer has ----- the importance of attracting new customers next quarter.",
+                options: ["applied", "demanded", "administered", "emphasized"],
+                correct: 3,
+                vocab: "chief financial officer (n) = giám đốc tài chính\nimportance (n) = tầm quan trọng",
+                explanation: "Đáp án đúng: 'emphasized'. 'Has emphasized the importance' có nghĩa là 'đã nhấn mạnh tầm quan trọng'.",
+                translation: "Giám đốc tài chính đã nhấn mạnh tầm quan trọng của việc thu hút khách hàng mới trong quý tới."
+            },
+            {
+                question: "Sewerd Furnishings is closing some of its showrooms because customers are ------- ordering furniture online.",
+                options: ["Increasing", "Increase", "Increasingly", "decreased"],
+                correct: 2,
+                vocab: "showrooms (n) = phòng trưng bày\nordering (v) = đặt hàng",
+                explanation: "Đáp án đúng: 'Increasingly'. 'Are increasingly ordering' có nghĩa là 'đang ngày càng đặt hàng'.",
+                translation: "Sewerd Furnishings đang đóng cửa một số phòng trưng bày của mình vì khách hàng đang ngày càng đặt hàng đồ nội thất trực tuyến."
+            },
+            {
+                question: "------- construction in progress at the old town hall building, tourist groups will not be allowed to enter the site.",
+                options: ["Now that", "While", "Even if", "Due to"],
+                correct: 3,
+                vocab: "construction (n) = xây dựng\ntourist groups (n) = nhóm du khách",
+                explanation: "Đáp án đúng: 'Due to'. 'Due to construction' có nghĩa là 'do việc xây dựng'.",
+                translation: "Do việc xây dựng đang diễn ra tại tòa nhà thị chính cũ, các nhóm du khách sẽ không được phép vào khu vực."
+            },
+            {
+                question: "Several drilling-technology experts will present the results of their ------- on June 23.",
+                options: ["comprehension", "resolution", "investigation", "specification"],
+                correct: 2,
+                vocab: "drilling-technology experts (n) = chuyên gia công nghệ khoan\nresults (n) = kết quả",
+                explanation: "Đáp án đúng: 'investigation'. 'Results of their investigation' có nghĩa là 'kết quả của cuộc điều tra của họ'.",
+                translation: "Một số chuyên gia công nghệ khoan sẽ trình bày kết quả của cuộc điều tra của họ vào ngày 23 tháng 6."
+            },
+            {
+                question: "The store had a ------- display to promote the newest book from the best-selling mystery author.",
+                options: ["default", "grateful", "talented", "massive"],
+                correct: 3,
+                vocab: "display (n) = trưng bày\npromote (v) = quảng bá",
+                explanation: "Đáp án đúng: 'massive'. 'A massive display' có nghĩa là 'một trưng bày lớn'.",
+                translation: "Cửa hàng đã có một trưng bày lớn để quảng bá cuốn sách mới nhất của tác giả tiểu thuyết bán chạy nhất."
+            },
+            {
+                question: "Most of the people ------- attended yesterday's workshop have already submitted their feedback.",
+                options: ["who", "those", "whose", "some"],
+                correct: 0,
+                vocab: "people (n) = người\nworkshop (n) = hội thảo",
+                explanation: "Đáp án đúng: 'who'. 'People who attended' có nghĩa là 'những người đã tham dự'.",
+                translation: "Hầu hết những người đã tham dự hội thảo hôm qua đã gửi phản hồi của họ."
+            },
+            {
+                question: "Both tasty and healthy, the tomato salad at Alfredi's Bistro is also large ------- to be served as a main dish.",
+                options: ["enough", "fully", "nearly", "well"],
+                correct: 0,
+                vocab: "tomato salad (n) = salad cà chua\nmain dish (n) = món chính",
+                explanation: "Đáp án đúng: 'enough'. 'Large enough' có nghĩa là 'đủ lớn'.",
+                translation: "Cả ngon và lành mạnh, salad cà chua tại Alfredi's Bistro cũng đủ lớn để được phục vụ như một món chính."
+            },
+            {
+                question: "The Klassin Group's booth at the Liberty Architecture Expo has garnered much -------.",
+                options: ["interest", "interests", "interested", "interesting"],
+                correct: 0,
+                vocab: "booth (n) = gian hàng\nexpo (n) = triển lãm",
+                explanation: "Đáp án đúng: 'interest'. 'Garnered much interest' có nghĩa là 'đã thu hút nhiều sự quan tâm'.",
+                translation: "Gian hàng của Klassin Group tại Triển lãm Kiến trúc Liberty đã thu hút được nhiều sự quan tâm."
+            },
+            {
+                question: "Save 25 percent on any printer ------- you buy a laptop computer at Diego's Electronics.",
+                options: ["whereas", "whenever", "such as", "seeing that"],
+                correct: 1,
+                vocab: "printer (n) = máy in\nlaptop computer (n) = máy tính xách tay",
+                explanation: "Đáp án đúng: 'whenever'. 'Whenever you buy' có nghĩa là 'bất cứ khi nào bạn mua'.",
+                translation: "Tiết kiệm 25% cho bất kỳ máy in nào khi bạn mua một máy tính xách tay tại Diego's Electronics."
+            },
+            {
+                question: "The recently adopted policy restructures the company's debt according to a ------ five-step plan.",
+                options: ["managing", "manageably", "manages", "manageable"],
+                correct: 3,
+                vocab: "policy (n) = chính sách\ndebt (n) = nợ",
+                explanation: "Đáp án đúng: 'manageable'. 'Manageable five-step plan' có nghĩa là 'kế hoạch năm bước có thể quản lý'.",
+                translation: "Chính sách mới được thông qua tái cấu trúc nợ của công ty theo một kế hoạch năm bước có thể quản lý."
+            },
+            {
+                question: "The quality assurance department needs to hire additional staff ------- production has increased by 50 percent.",
+                options: ["even though", "since", "because of", "therefore"],
+                correct: 1,
+                vocab: "quality assurance department (n) = bộ phận đảm bảo chất lượng\nstaff (n) = nhân viên",
+                explanation: "Đáp án đúng: 'since'. 'Since production has increased' có nghĩa là 'vì sản xuất đã tăng'.",
+                translation: "Bộ phận đảm bảo chất lượng cần thuê thêm nhân viên vì sản xuất đã tăng 50 phần trăm."
+            },
+            {
+                question: "Your order cannot ------- until we have received full payment.",
+                options: ["to process", "be processed", "being processed", "has processed"],
+                correct: 1,
+                vocab: "order (n) = đơn hàng\npayment (n) = thanh toán",
+                explanation: "Đáp án đúng: 'be processed'. 'Cannot be processed' có nghĩa là 'không thể được xử lý'.",
+                translation: "Đơn hàng của bạn không thể được xử lý cho đến khi chúng tôi nhận được thanh toán đầy đủ."
+            }
+        ];
+
+        let score = 0;
+        const quizContainer = document.getElementById("quiz");
+        
+        function loadQuiz() {
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.classList.add("question-block");
+                questionDiv.innerHTML = `
+                    <p class="question">${index + 1}. ${q.question}</p>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <label>
+                                <input type="radio" name="q${index}" value="${i}" onclick="checkAnswer(${index}, ${i})"> ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <p class="result" id="result-${index}"></p>
+                `;
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+        
+        function checkAnswer(qIndex, selected) {
+            const resultDiv = document.getElementById(`result-${qIndex}`);
+            const question = questions[qIndex];
+            const options = document.getElementsByName(`q${qIndex}`);
+            
+            options.forEach(option => option.disabled = true);
+            
+            if (selected == question.correct) {
+                score++;
+                resultDiv.innerHTML = `<span style='color:green;'>✔ Đúng!</span><br><strong>Từ vựng:</strong><br>${question.vocab.replace(/\n/g, '<br>')}<br><strong>Giải thích:</strong> ${question.explanation}<br><strong>Dịch:</strong> ${question.translation}`;
+            } else {
+                resultDiv.innerHTML = `<span style='color:red;'>✘ Sai!</span><br><strong>Từ vựng:</strong><br>${question.vocab.replace(/\n/g, '<br>')}<br><strong>Giải thích:</strong> ${question.explanation}<br><strong>Dịch:</strong> ${question.translation}`;
+            }
+            document.getElementById("score").innerText = `Số câu đúng: ${score} / ${questions.length}`;
+        }
+        
+        loadQuiz();
+    </script>
+</body>
+</html>

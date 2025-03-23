@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRACTICE TEST 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            padding: 5px;
+            background: #e0e0e0;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .summary {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>PRACTICE TEST 4</h2>
+        <div id="quiz"></div>
+        <p class="summary" id="score"></p>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "The regional manager will arrive tomorrow, so please ensure that all ----- documents are ready.",
+                options: ["she", "her", "hers", "herself"],
+                correct: 1,
+                vocab: "regional manager (n) = giám đốc khu vực\ndocuments (n) = tài liệu",
+                explanation: "Đáp án đúng: 'her'. 'Her documents' có nghĩa là 'tài liệu của cô ấy'.",
+                translation: "Giám đốc khu vực sẽ đến vào ngày mai, vì vậy hãy đảm bảo rằng tất cả tài liệu của cô ấy đã sẵn sàng."
+            },
+            {
+                question: "The historic Waldridge Building was constructed nearly 200 years -----.",
+                options: ["away", "enough", "ago", "still"],
+                correct: 2,
+                vocab: "historic (adj) = lịch sử\nconstructed (v) = xây dựng",
+                explanation: "Đáp án đúng: 'ago'. '200 years ago' có nghĩa là '200 năm trước'.",
+                translation: "Tòa nhà lịch sử Waldridge được xây dựng cách đây gần 200 năm."
+            },
+            {
+                question: "Consumers ----- enthusiastically to the new colors developed by Sanwell Paint.",
+                options: ["responding", "response", "responsively", "responded"],
+                correct: 3,
+                vocab: "consumers (n) = người tiêu dùng\nenthusiastically (adv) = một cách nhiệt tình",
+                explanation: "Đáp án đúng: 'responded'. 'Consumers responded' có nghĩa là 'người tiêu dùng đã phản hồi'.",
+                translation: "Người tiêu dùng đã phản hồi một cách nhiệt tình với các màu sắc mới được phát triển bởi Sanwell Paint."
+            },
+            {
+                question: "The ----- files contain your employment contract and information about our company.",
+                options: ["directed", "attached", "interested", "connected"],
+                correct: 1,
+                vocab: "files (n) = tài liệu\nemployment contract (n) = hợp đồng lao động",
+                explanation: "Đáp án đúng: 'attached'. 'Attached files' có nghĩa là 'các tài liệu đính kèm'.",
+                translation: "Các tài liệu đính kèm chứa hợp đồng lao động của bạn và thông tin về công ty của chúng tôi."
+            },
+            {
+                question: "Please submit each reimbursement request ----- according to its category, as outlined in last month’s memo.",
+                options: ["separately", "separateness", "separates", "separate"],
+                correct: 0,
+                vocab: "submit (v) = nộp\nreimbursement request (n) = yêu cầu hoàn tiền",
+                explanation: "Đáp án đúng: 'separately'. 'Submit separately' có nghĩa là 'nộp riêng'.",
+                translation: "Vui lòng nộp mỗi yêu cầu hoàn tiền riêng theo danh mục của nó, như đã nêu trong bản ghi nhớ tháng trước."
+            },
+            {
+                question: "Customers can wait in the reception area ----- our mechanics complete the car repairs.",
+                options: ["whether", "except", "while", "during"],
+                correct: 2,
+                vocab: "customers (n) = khách hàng\nreception area (n) = khu vực tiếp tân",
+                explanation: "Đáp án đúng: 'while'. 'While our mechanics complete' có nghĩa là 'trong khi các kỹ thuật viên của chúng tôi hoàn thành'.",
+                translation: "Khách hàng có thể chờ trong khu vực tiếp tân trong khi các kỹ thuật viên của chúng tôi hoàn thành việc sửa chữa xe."
+            },
+            {
+                question: "No one without a pass will be granted ----- to the conference.",
+                options: ["admission", "is admitting", "admitted", "to admit"],
+                correct: 0,
+                vocab: "pass (n) = thẻ ra vào\nconference (n) = hội nghị",
+                explanation: "Đáp án đúng: 'admission'. 'Granted admission' có nghĩa là 'được cấp phép vào'.",
+                translation: "Không ai không có thẻ ra vào sẽ được cấp phép vào hội nghị."
+            },
+            {
+                question: "According to Florida Digital Designer Magazine, many graphic designers do not consider ------- to be traditional artists.",
+                options: ["it", "their", "themselves", "itself"],
+                correct: 2,
+                vocab: "graphic designers (n) = nhà thiết kế đồ họa\nconsider (v) = xem xét",
+                explanation: "Đáp án đúng: 'themselves'. 'Consider themselves' có nghĩa là 'xem mình là'.",
+                translation: "Theo tạp chí Florida Digital Designer, nhiều nhà thiết kế đồ họa không xem mình là những nghệ sĩ truyền thống."
+            },
+            {
+                question: "The registration fee is ----- refundable up to two weeks prior to the conference date.",
+                options: ["Fullest", "Fuller", "Fully", "Full"],
+                correct: 2,
+                vocab: "registration fee (n) = phí đăng ký\nrefundable (adj) = có thể hoàn lại",
+                explanation: "Đáp án đúng: 'Fully'. 'Fully refundable' có nghĩa là 'hoàn lại toàn bộ'.",
+                translation: "Phí đăng ký có thể hoàn lại toàn bộ lên đến hai tuần trước ngày hội nghị."
+            },
+            {
+                question: "All identifying information has been ----- from this letter of complaint so that it can be used for training purposes.",
+                options: ["produced", "extended", "removed", "resolved"],
+                correct: 2,
+                vocab: "identifying information (n) = thông tin nhận dạng\nletter of complaint (n) = thư khiếu nại",
+                explanation: "Đáp án đúng: 'removed'. 'Has been removed' có nghĩa là 'đã bị xóa'.",
+                translation: "Tất cả thông tin nhận dạng đã bị xóa khỏi thư khiếu nại này để nó có thể được sử dụng cho mục đích đào tạo."
+            },
+            {
+                question: "----- this time next year, Larkview Technology will have acquired two new subsidiaries.",
+                options: ["To", "By", "Quite", "Begin"],
+                correct: 1,
+                vocab: "this time (n) = thời điểm này\nacquired (v) = đã mua lại",
+                explanation: "Đáp án đúng: 'By'. 'By this time next year' có nghĩa là 'trước thời điểm này năm sau'.",
+                translation: "Trước thời điểm này năm sau, Larkview Technology sẽ đã mua lại hai công ty con mới."
+            },
+            {
+                question: "Table reservations for ----- greater than ten must be made at least one day in advance.",
+                options: ["plates", "meals", "sizes", "parties"],
+                correct: 3,
+                vocab: "reservations (n) = đặt chỗ\nparties (n) = nhóm",
+                explanation: "Đáp án đúng: 'parties'. 'Reservations for parties' có nghĩa là 'đặt chỗ cho các nhóm'.",
+                translation: "Đặt chỗ cho các nhóm lớn hơn mười phải được thực hiện ít nhất một ngày trước."
+            },
+            {
+                question: "Because of ----- weather conditions, tonight’s concert in Harbin Park has been canceled.",
+                options: ["worsening", "worsens", "worsen", "worst"],
+                correct: 0,
+                vocab: "weather conditions (n) = điều kiện thời tiết\nconcert (n) = buổi hòa nhạc",
+                explanation: "Đáp án đúng: 'worsening'. 'Worsening weather conditions' có nghĩa là 'điều kiện thời tiết xấu đi'.",
+                translation: "Vì điều kiện thời tiết xấu đi, buổi hòa nhạc tối nay tại công viên Harbin đã bị hủy bỏ."
+            },
+            {
+                question: "Ms. Al-Omani will rely ----- team leaders to develop employee incentive programs.",
+                options: ["onto", "into", "within", "upon"],
+                correct: 3,
+                vocab: "rely (v) = dựa vào\nteam leaders (n) = lãnh đạo nhóm",
+                explanation: "Đáp án đúng: 'upon'. 'Rely upon' có nghĩa là 'dựa vào'.",
+                translation: "Cô Al-Omani sẽ dựa vào các lãnh đạo nhóm để phát triển các chương trình khuyến khích nhân viên."
+            },
+            {
+                question: "Survey ----- analyze the layout of a land area above and below ground level.",
+                options: ["technicians", "technically", "technical", "technicality"],
+                correct: 0,
+                vocab: "survey (n) = khảo sát\nanalyze (v) = phân tích",
+                explanation: "Đáp án đúng: 'technicians'. 'Survey technicians' có nghĩa là 'các kỹ thuật viên khảo sát'.",
+                translation: "Các kỹ thuật viên khảo sát phân tích bố cục của một khu vực đất trên và dưới mặt đất."
+            },
+            {
+                question: "----- assemble your Gessen product, first read all instructions and gather all required tools.",
+                options: ["For the purpose of", "To be sure", "In order to", "For example"],
+                correct: 2,
+                vocab: "assemble (v) = lắp ráp\ninstructions (n) = hướng dẫn",
+                explanation: "Đáp án đúng: 'In order to'. 'In order to assemble' có nghĩa là 'để lắp ráp'.",
+                translation: "Để lắp ráp sản phẩm Gessen của bạn, trước tiên hãy đọc tất cả các hướng dẫn và thu thập tất cả các công cụ cần thiết."
+            },
+            {
+                question: "Online shoppers who experience long waits for their orders tend ----- the business low ratings.",
+                options: ["have given", "gave", "to give", "giving"],
+                correct: 2,
+                vocab: "online shoppers (n) = người mua sắm trực tuyến\nratings (n) = đánh giá",
+                explanation: "Đáp án đúng: 'to give'. 'Tend to give' có nghĩa là 'có xu hướng cho'.",
+                translation: "Những người mua sắm trực tuyến trải qua thời gian chờ đợi lâu cho đơn hàng của họ có xu hướng cho doanh nghiệp đánh giá thấp."
+            },
+            {
+                question: "----- of the new Delran train station will begin in late September.",
+                options: ["Association", "Construction", "Violation", "Comprehension"],
+                correct: 1,
+                vocab: "construction (n) = xây dựng\nstation (n) = nhà ga",
+                explanation: "Đáp án đúng: 'Construction'. 'Construction of the station' có nghĩa là 'xây dựng nhà ga'.",
+                translation: "Việc xây dựng nhà ga mới Delran sẽ bắt đầu vào cuối tháng Chín."
+            },
+            {
+                question: "The computing power of the new laptop is ----- to any desktop computer in the same price range.",
+                options: ["compare", "comparing", "comparison", "comparable"],
+                correct: 3,
+                vocab: "computing power (n) = sức mạnh tính toán\nlaptop (n) = máy tính xách tay",
+                explanation: "Đáp án đúng: 'comparable'. 'Is comparable to' có nghĩa là 'có thể so sánh với'.",
+                translation: "Sức mạnh tính toán của máy tính xách tay mới có thể so sánh với bất kỳ máy tính để bàn nào trong cùng một phân khúc giá."
+            },
+            {
+                question: "Dr. Yuina Hashimoto recently added another doctor to her practice,------- allowing more patients to be seen.",
+                options: ["that", "thus", "which", "so that"],
+                correct: 3,
+                vocab: "practice (n) = phòng khám\npatients (n) = bệnh nhân",
+                explanation: "Đáp án đúng: 'so that'. 'So that more patients can be seen' có nghĩa là 'để nhiều bệnh nhân hơn có thể được khám'.",
+                translation: "Bác sĩ Yuina Hashimoto gần đây đã thêm một bác sĩ khác vào phòng khám của mình, để nhiều bệnh nhân hơn có thể được khám."
+            },
+            {
+                question: "Graden Hotel ----- its superior reputation thanks to the leadership of its president, Marcia Clemente.",
+                options: ["practiced", "treated", "heard", "earned"],
+                correct: 3,
+                vocab: "reputation (n) = danh tiếng\nleadership (n) = sự lãnh đạo",
+                explanation: "Đáp án đúng: 'earned'. 'Earned its reputation' có nghĩa là 'đã tạo dựng được danh tiếng'.",
+                translation: "Khách sạn Graden đã tạo dựng được danh tiếng vượt trội nhờ sự lãnh đạo của giám đốc Marcia Clemente."
+            },
+            {
+                question: "Aki Katsuro’s latest novel is his most exciting - ---- and is sure to make Radin Books’ best-seller list.",
+                options: ["just", "later", "yet", "very"],
+                correct: 3,
+                vocab: "novel (n) = tiểu thuyết\nexciting (adj) = thú vị",
+                explanation: "Đáp án đúng: 'very'. 'Most exciting' có nghĩa là 'thú vị nhất'.",
+                translation: "Tiểu thuyết mới nhất của Aki Katsuro là thú vị nhất và chắc chắn sẽ có mặt trong danh sách sách bán chạy nhất của Radin Books."
+            },
+            {
+                question: "Thanks to ----- pastry chef Ana Villagra, Lauduccl’s Restaurant has become a favorite with local patrons.",
+                options: ["largely", "larger", "large", "largest"],
+                correct: 2,
+                vocab: "pastry chef (n) = đầu bếp bánh\nrestaurant (n) = nhà hàng",
+                explanation: "Đáp án đúng: 'large'. 'Large pastry chef' có nghĩa là 'đầu bếp bánh nổi tiếng'.",
+                translation: "Nhờ đầu bếp bánh nổi tiếng Ana Villagra, nhà hàng Lauduccl đã trở thành một địa điểm yêu thích của thực khách địa phương."
+            },
+            {
+                question: "At Crintack Manufacturing, we acknowledge our ----- to provide a safe workplace for our employees.",
+                options: ["assumption", "valuation", "perception", "obligation"],
+                correct: 3,
+                vocab: "obligation (n) = nghĩa vụ\nworkplace (n) = nơi làm việc",
+                explanation: "Đáp án đúng: 'obligation'. 'Our obligation' có nghĩa là 'nghĩa vụ của chúng tôi'.",
+                translation: "Tại Crintack Manufacturing, chúng tôi thừa nhận nghĩa vụ của mình để cung cấp một nơi làm việc an toàn cho nhân viên."
+            },
+            {
+                question: "----- Mr. Donovan had expected the charity event to be a success, the response from the community still overwhelmed him.",
+                options: ["Whenever", "Although", "Even so", "In spite of"],
+                correct: 1,
+                vocab: "charity event (n) = sự kiện từ thiện\nresponse (n) = phản hồi",
+                explanation: "Đáp án đúng: 'Although'. 'Although Mr. Donovan had expected' có nghĩa là 'mặc dù ông Donovan đã mong đợi'.",
+                translation: "Mặc dù ông Donovan đã mong đợi sự kiện từ thiện sẽ thành công, nhưng phản hồi từ cộng đồng vẫn khiến ông cảm thấy choáng ngợp."
+            },
+            {
+                question: "This free mobile app provides ----- calendar updates, so salespeople will never miss an appointment.",
+                options: ["casual", "equal", "continual", "eventual"],
+                correct: 2,
+                vocab: "mobile app (n) = ứng dụng di động\ncalendar updates (n) = cập nhật lịch",
+                explanation: "Đáp án đúng: 'continual'. 'Continual updates' có nghĩa là 'cập nhật liên tục'.",
+                translation: "Ứng dụng di động miễn phí này cung cấp các cập nhật lịch liên tục, vì vậy nhân viên bán hàng sẽ không bao giờ bỏ lỡ một cuộc hẹn."
+            },
+            {
+                question: "Most senior managers approved the architect’s proposal for the office layout, although ----- expressed concerns about the cost.",
+                options: ["one", "one another", "each other", "other"],
+                correct: 0,
+                vocab: "senior managers (n) = quản lý cấp cao\narchitect (n) = kiến trúc sư",
+                explanation: "Đáp án đúng: 'one'. 'One expressed concerns' có nghĩa là 'một người đã bày tỏ lo ngại'.",
+                translation: "Hầu hết các quản lý cấp cao đã phê duyệt đề xuất của kiến trúc sư cho bố cục văn phòng, mặc dù một người đã bày tỏ lo ngại về chi phí."
+            },
+            {
+                question: "Greenville Library has hired an office assistant not only to perform general office duties ----- to support an ongoing special project.",
+                options: ["but also", "only if", "other than", "as for"],
+                correct: 0,
+                vocab: "office assistant (n) = trợ lý văn phòng\nspecial project (n) = dự án đặc biệt",
+                explanation: "Đáp án đúng: 'but also'. 'Not only... but also' có nghĩa là 'không chỉ... mà còn'.",
+                translation: "Thư viện Greenville đã thuê một trợ lý văn phòng không chỉ để thực hiện các nhiệm vụ văn phòng chung mà còn để hỗ trợ một dự án đặc biệt đang diễn ra."
+            },
+            {
+                question: "The lease with The Pawlicki Group ----- if modifications to the existing offices are made.",
+                options: ["had continued", "will be continued", "was continuing", "has been continuing"],
+                correct: 1,
+                vocab: "lease (n) = hợp đồng thuê\nmodifications (n) = sửa đổi",
+                explanation: "Đáp án đúng: 'will be continued'. 'Will be continued' có nghĩa là 'sẽ được tiếp tục'.",
+                translation: "Hợp đồng thuê với The Pawlicki Group sẽ được tiếp tục nếu có sửa đổi đối với các văn phòng hiện có."
+            },
+            {
+                question: "Wrazen Associates ----- a summary with a list of recommendations as a routine part of any audit.",
+                options: ["realizes", "induces", "causes", "issues"],
+                correct: 3,
+                vocab: "summary (n) = tóm tắt\nrecommendations (n) = khuyến nghị",
+                explanation: "Đáp án đúng: 'issues'. 'Issues a summary' có nghĩa là 'phát hành một tóm tắt'.",
+                translation: "Wrazen Associates phát hành một tóm tắt với danh sách các khuyến nghị như một phần thường lệ của bất kỳ cuộc kiểm toán nào."
+            }
+        ];
+
+        let score = 0;
+        const quizContainer = document.getElementById("quiz");
+        
+        function loadQuiz() {
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.classList.add("question-block");
+                questionDiv.innerHTML = `
+                    <p class="question">${index + 1}. ${q.question}</p>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <label>
+                                <input type="radio" name="q${index}" value="${i}" onclick="checkAnswer(${index}, ${i})"> ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <p class="result" id="result-${index}"></p>
+                `;
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+        
+        function checkAnswer(qIndex, selected) {
+            const resultDiv = document.getElementById(`result-${qIndex}`);
+            const question = questions[qIndex];
+            const options = document.getElementsByName(`q${qIndex}`);
+            
+            options.forEach(option => option.disabled = true);
+            
+            if (selected == question.correct) {
+                score++;
+                resultDiv.innerHTML = `<span style='color:green;'>✔ Đúng!</span><br><strong>Từ vựng:</strong><br>${question.vocab.replace(/\n/g, '<br>')}<br><strong>Giải thích:</strong> ${question.explanation}<br><strong>Dịch:</strong> ${question.translation}`;
+            } else {
+                resultDiv.innerHTML = `<span style='color:red;'>✘ Sai!</span><br><strong>Từ vựng:</strong><br>${question.vocab.replace(/\n/g, '<br>')}<br><strong>Giải thích:</strong> ${question.explanation}<br><strong>Dịch:</strong> ${question.translation}`;
+            }
+            document.getElementById("score").innerText = `Số câu đúng: ${score} / ${questions.length}`;
+        }
+        
+        loadQuiz();
+    </script>
+</body>
+</html>

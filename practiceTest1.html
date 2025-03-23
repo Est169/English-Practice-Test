@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRACTICE TEST 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            padding: 5px;
+            background: #e0e0e0;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .summary {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>PRACTICE TEST 1</h2>
+        <div id="quiz"></div>
+        <p class="summary" id="score"></p>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Ms. Durkin asked for volunteers to help ____ with the employee fitness program.",
+                options: ["she", "her", "hers", "herself"],
+                correct: 1,
+                vocab: "volunteers (n) = tình nguyện viên\nfitness program (n) = chương trình thể dục",
+                explanation: "Đáp án đúng: 'her'. Đây là tân ngữ phù hợp sau động từ 'help'.",
+                translation: "Cô Durkin đã yêu cầu các tình nguyện viên giúp cô ấy với chương trình thể dục của nhân viên."
+            },
+            {
+                question: "___ a year, Tarrin Industrial Supply audits the accounts of all of its factories.",
+                options: ["Once", "Immediately", "Directly", "Yet"],
+                correct: 0,
+                vocab: "audits (v) = kiểm toán\naccounts (n) = tài khoản\nfactories (n) = nhà máy",
+                explanation: "Đáp án đúng: 'Once'. 'Once a year' có nghĩa là 'một lần mỗi năm', phù hợp về nghĩa và cấu trúc câu.",
+                translation: "Mỗi năm một lần, Tarrin Industrial Supply kiểm toán tài khoản của tất cả các nhà máy của nó."
+            },
+            {
+                question: "He ____ the position if he had applied for it.",
+                options: ["got", "can get", "could have gotten", "can't get"],
+                correct: 2,
+                vocab: "position (n) = vị trí\napply (v) = nộp đơn",
+                explanation: "Đáp án đúng: 'could have gotten'. Câu này sử dụng cấu trúc điều kiện loại 3.",
+                translation: "Anh ấy đã có thể có vị trí đó nếu anh ấy đã nộp đơn."
+            },
+            {
+                question: "It's essential that he ____ his term paper by the end of next week.",
+                options: ["submit", "submits", "submitted", "has submitted"],
+                correct: 0,
+                vocab: "essential (adj) = cần thiết\nterm paper (n) = bài luận",
+                explanation: "Đáp án đúng: 'submit'. Câu này sử dụng cấu trúc 'It's essential that...'.",
+                translation: "Điều cần thiết là anh ấy phải nộp bài luận của mình trước cuối tuần tới."
+            },
+            {
+                question: "Ms. Pham requested a refund ____ the coffeemaker she received was damaged.",
+                options: ["despite", "why", "concerning", "because"],
+                correct: 3,
+                vocab: "refund (n) = hoàn tiền\ndamaged (adj) = bị hư hỏng",
+                explanation: "Đáp án đúng: 'because'. Câu này giải thích lý do cho yêu cầu hoàn tiền.",
+                translation: "Cô Pham đã yêu cầu hoàn tiền vì máy pha cà phê cô nhận được bị hư hỏng."
+            },
+            {
+                question: "Mathematics ____ the study of numbers, quantities, or shapes.",
+                options: ["be", "is", "are", "was"],
+                correct: 1,
+                vocab: "mathematics (n) = toán học\nstudy (n) = nghiên cứu",
+                explanation: "Đáp án đúng: 'is'. 'Mathematics' là danh từ số ít.",
+                translation: "Toán học là nghiên cứu về các số, số lượng hoặc hình dạng."
+            },
+            {
+                question: "Each book ____ unique illustrations.",
+                options: ["have", "has", "having", "haves"],
+                correct: 1,
+                vocab: "illustrations (n) = hình minh họa",
+                explanation: "Đáp án đúng: 'has'. 'Each' yêu cầu động từ số ít.",
+                translation: "Mỗi cuốn sách có những hình minh họa độc đáo."
+            },
+            {
+                question: "He usually ____ the bus to work, but this morning he took the train instead.",
+                options: ["takes", "took", "has taken", "had taken"],
+                correct: 0,
+                vocab: "bus (n) = xe buýt\ntrain (n) = tàu",
+                explanation: "Đáp án đúng: 'takes'. Câu này nói về thói quen.",
+                translation: "Anh ấy thường đi xe buýt đến nơi làm việc, nhưng sáng nay anh ấy đã đi tàu thay vào đó."
+            },
+            {
+                question: "We will leave the moment he ____",
+                options: ["arrive", "arrives", "will arrive", "has arrived"],
+                correct: 1,
+                vocab: "leave (v) = rời đi\narrive (v) = đến",
+                explanation: "Đáp án đúng: 'arrives'. Câu này sử dụng thì hiện tại đơn cho hành động tương lai.",
+                translation: "Chúng tôi sẽ rời đi ngay khi anh ấy đến."
+            },
+            {
+                question: "We are all tired of his ____ speech.",
+                options: ["bore", "to bore", "boring", "bored"],
+                correct: 2,
+                vocab: "tired (adj) = mệt mỏi\nspeech (n) = bài phát biểu",
+                explanation: "Đáp án đúng: 'boring'. Tính từ mô tả bài phát biểu.",
+                translation: "Chúng tôi đều mệt mỏi với bài phát biểu nhàm chán của anh ấy."
+            },
+            {
+                question: "Mr. Brennel ____ positions in various areas of the company before he became president.",
+                options: ["occupation", "occupational", "occupying", "occupied"],
+                correct: 3,
+                vocab: "positions (n) = vị trí\npresident (n) = tổng thống",
+                explanation: "Đáp án đúng: 'occupied'. Thì quá khứ đơn được sử dụng ở đây.",
+                translation: "Ông Brennel đã đảm nhiệm các vị trí trong nhiều lĩnh vực của công ty trước khi trở thành tổng thống."
+            },
+            {
+                question: "The situation is likely to become ____ than we expected it would be.",
+                options: ["much bad", "much worse", "very bad", "very worse"],
+                correct: 1,
+                vocab: "situation (n) = tình huống\nlikely (adj) = có khả năng",
+                explanation: "Đáp án đúng: 'much worse'. Câu này so sánh tình huống hiện tại với dự đoán.",
+                translation: "Tình huống có khả năng trở nên tồi tệ hơn nhiều so với những gì chúng tôi đã dự đoán."
+            },
+            {
+                question: "The director is not as particular about the project ____ he used to be.",
+                options: ["so", "than", "as", "that"],
+                correct: 2,
+                vocab: "director (n) = giám đốc\nparticular (adj) = đặc biệt",
+                explanation: "Đáp án đúng: 'as'. Câu này so sánh sự chú ý của giám đốc hiện tại với trước đây.",
+                translation: "Giám đốc không còn chú ý đến dự án như trước đây."
+            },
+            {
+                question: "Of the two games, no one thought the previous one was ____ exciting game.",
+                options: ["more", "the best", "most", "the more"],
+                correct: 3,
+                vocab: "exciting (adj) = thú vị\nprevious (adj) = trước",
+                explanation: "Đáp án đúng: 'the more'. Khi trong câu thấy có “Of the two” hoặc “Between them” thì sẽ có thêm mạo từ “The” đứng trước so sánh hơn",
+                translation: "Trong hai trò chơi, không ai nghĩ trò chơi trước đó là trò chơi thú vị hơn."
+            },
+            {
+                question: "____ what else to do, he stayed calm and did nothing as asked.",
+                options: ["Not knowing", "No knowing", "Not known", "Not knew"],
+                correct: 0,
+                vocab: "calm (adj) = bình tĩnh\nasked (v) = được yêu cầu",
+                explanation: "Đáp án đúng: 'Not knowing'. Câu này diễn tả trạng thái không biết.",
+                translation: "Không biết phải làm gì khác, anh ấy đã giữ bình tĩnh và không làm gì như đã được yêu cầu."
+            },
+            {
+                question: "Most people say there is ____ such thing as ghosts, but some still believe in them.",
+                options: ["no", "not", "ever", "none"],
+                correct: 0,
+                vocab: "ghosts (n) = ma\nbelieve (v) = tin",
+                explanation: "Đáp án đúng: 'no'. Câu này nói về sự tồn tại của ma.",
+                translation: "Hầu hết mọi người nói rằng không có thứ gì như ma, nhưng một số vẫn tin vào chúng."
+            },
+            {
+                question: "John continued to tell lies, though his father had told him ____ do so.",
+                options: ["to not", "to never", "not to", "no to"],
+                correct: 2,
+                vocab: "lies (n) = lời nói dối\nfather (n) = cha",
+                explanation: "Đáp án đúng: 'not to'. Câu này diễn tả mệnh lệnh của cha John.",
+                translation: "John tiếp tục nói dối, mặc dù cha anh đã bảo anh không nên làm như vậy."
+            },
+            {
+                question: "Whether or not we play is dependent mostly ____ the weather.",
+                options: ["to", "on", "by", "in"],
+                correct: 1,
+                vocab: "dependent (adj) = phụ thuộc\nweather (n) = thời tiết",
+                explanation: "Đáp án đúng: 'on'. Câu này nói về sự phụ thuộc vào thời tiết.",
+                translation: "Việc chúng ta có chơi hay không chủ yếu phụ thuộc vào thời tiết."
+            },
+            {
+                question: "He seems to have cut ____ shaving this morning.",
+                options: ["him", "himself", "his", "he"],
+                correct: 1,
+                vocab: "cut (v) = cắt\nshaving (n) = cạo râu",
+                explanation: "Đáp án đúng: 'himself'. Câu này nói về việc tự làm tổn thương bản thân.",
+                translation: "Có vẻ như anh ấy đã tự cắt mình khi cạo râu sáng nay."
+            },
+            {
+                question: "When I saw her last night, she was talking to ____ loudly.",
+                options: ["themselves", "hers", "herself", "she"],
+                correct: 2,
+                vocab: "talking (v) = nói chuyện\nloudly (adv) = to",
+                explanation: "Đáp án đúng: 'herself'. Câu này nói về việc cô ấy nói chuyện với chính mình.",
+                translation: "Khi tôi thấy cô ấy tối qua, cô ấy đang nói chuyện với chính mình một cách to tiếng."
+            },
+            {
+                question: "As far as I know, he doesn't have ____ friends.",
+                options: ["much", "many", "quite a little", "another"],
+                correct: 1,
+                vocab: "friends (n) = bạn bè\nknow (v) = biết",
+                explanation: "Đáp án đúng: 'many'. 'Friends' là danh từ số nhiều.",
+                translation: "Theo như tôi biết, anh ấy không có nhiều bạn bè."
+            },
+            {
+                question: "____ three weeks, we go to the movies.",
+                options: ["Each", "All", "Every", "Any"],
+                correct: 2,
+                vocab: "movies (n) = phim\nweeks (n) = tuần",
+                explanation: "Đáp án đúng: 'Every'. 'Every three weeks' có nghĩa là 'mỗi ba tuần'.",
+                translation: "Mỗi ba tuần, chúng tôi đi xem phim."
+            },
+            {
+                question: "He was found guilty ____ possessing illegal drugs.",
+                options: ["with", "in", "from", "of"],
+                correct: 3,
+                vocab: "guilty (adj) = có tội\npossessing (v) = sở hữu",
+                explanation: "Đáp án đúng: 'of'. Câu này nói về việc bị kết tội.",
+                translation: "Anh ta bị kết tội vì sở hữu ma túy bất hợp pháp."
+            },
+            {
+                question: "There was so ____ on the highway that we couldn't even go half the speed limit.",
+                options: ["much traffics", "much traffic", "many traffic", "many traffics"],
+                correct: 1,
+                vocab: "traffic (n) = giao thông\nhighway (n) = đường cao tốc",
+                explanation: "Đáp án đúng: 'much traffic'. 'Traffic' là danh từ không đếm được.",
+                translation: "Có quá nhiều giao thông trên đường cao tốc đến nỗi chúng tôi không thể đi được nửa tốc độ giới hạn."
+            },
+            {
+                question: "I have just finished ____ assignment.",
+                options: ["a thirty pages", "thirty-page", "thirty pages", "a thirty-page"],
+                correct: 3,
+                vocab: "assignment (n) = bài tập\nfinished (v) = hoàn thành",
+                explanation: "Đáp án đúng: 'a thirty-page'. Câu này yêu cầu một danh từ số ít.",
+                translation: "Tôi vừa hoàn thành một bài tập ba mươi trang."
+            },
+            {
+                question: "As soon as ____ is over, he hurries home to take care of his sister.",
+                options: ["a school", "the school", "that school", "school"],
+                correct: 3,
+                vocab: "school (n) = trường học\nhurries (v) = vội vàng",
+                explanation: "Đáp án đúng: 'school'. Câu này nói về việc kết thúc một ngày học.",
+                translation: "Ngay khi trường học kết thúc, anh ấy vội vàng về nhà để chăm sóc em gái."
+            },
+            {
+                question: "The stormy weather kept them ____ going up the mountain.",
+                options: ["of", "from", "with", "for"],
+                correct: 1,
+                vocab: "stormy (adj) = bão bùng\nmountain (n) = núi",
+                explanation: "Đáp án đúng: 'from'. Câu này nói về việc bị ngăn cản bởi thời tiết.",
+                translation: "Thời tiết bão bùng đã giữ họ không thể lên núi."
+            },
+            {
+                question: "Dawn, ____ is a well-known pop musician, has been married three times.",
+                options: ["that", "who", "which", "whom"],
+                correct: 1,
+                vocab: "musician (n) = nhạc sĩ\nmarried (v) = kết hôn",
+                explanation: "Đáp án đúng: 'who'. Câu này sử dụng đại từ quan hệ.",
+                translation: "Dawn, người là một nhạc sĩ pop nổi tiếng, đã kết hôn ba lần."
+            },
+            {
+                question: "We should cut down ____ our expenditures.",
+                options: ["in", "at", "on", "with"],
+                correct: 2,
+                vocab: "cut down (v) = cắt giảm\nexpenditures (n) = chi tiêu",
+                explanation: "Đáp án đúng: 'on'. Câu này nói về việc cắt giảm chi tiêu.",
+                translation: "Chúng ta nên cắt giảm chi tiêu của mình."
+            },
+            {
+                question: "Both he ____ his wife were satisfied with the location of their new house.",
+                options: ["or", "nor", "and", "so"],
+                correct: 2,
+                vocab: "satisfied (adj) = hài lòng\nlocation (n) = vị trí",
+                explanation: "Đáp án đúng: 'and'. Câu này nói về cả hai người.",
+                translation: "Cả anh ấy và vợ anh ấy đều hài lòng với vị trí của ngôi nhà mới."
+            }
+        ];
+
+        let score = 0;
+        const quizContainer = document.getElementById("quiz");
+        
+        function loadQuiz() {
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.classList.add("question-block");
+                questionDiv.innerHTML = `
+                    <p class="question">${index + 1}. ${q.question}</p>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <label>
+                                <input type="radio" name="q${index}" value="${i}" onclick="checkAnswer(${index}, ${i})"> ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <p class="result" id="result-${index}"></p>
+                `;
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+        
+        function checkAnswer(qIndex, selected) {
+            const resultDiv = document.getElementById(`result-${qIndex}`);
+            const question = questions[qIndex];
+            const options = document.getElementsByName(`q${qIndex}`);
+            
+            options.forEach(option => option.disabled = true);
+            
+            if (selected == question.correct) {
+                score++;
+                resultDiv.innerHTML = `<span style='color:green;'>✔ Đúng!</span><br><strong>Từ vựng:</strong><br>${question.vocab.replace(/\n/g, '<br>')}<br><strong>Giải thích:</strong> ${question.explanation}<br><strong>Dịch:</strong> ${question.translation}`;
+            } else {
+                resultDiv.innerHTML = `<span style='color:red;'>✘ Sai!</span><br><strong>Từ vựng:</strong><br>${question.vocab.replace(/\n/g, '<br>')}<br><strong>Giải thích:</strong> ${question.explanation}<br><strong>Dịch:</strong> ${question.translation}`;
+            }
+            document.getElementById("score").innerText = `Số câu đúng: ${score} / ${questions.length}`;
+        }
+        
+        loadQuiz();
+    </script>
+</body>
+</html>
