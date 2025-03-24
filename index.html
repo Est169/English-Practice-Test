@@ -10,12 +10,6 @@
         body {
             background-color: #f4f4f4;
         }
-        .header {
-            margin-bottom: 20px;
-        }
-        .header button {
-            margin: 5px; /* Thêm khoảng cách giữa các nút */
-        }
         iframe {
             width: 100%; /* Đặt chiều rộng của iframe là 100% */
             height: calc(100vh - 200px); /* Chiều cao tràn màn hình, trừ đi khoảng cách từ trên xuống */
@@ -26,7 +20,8 @@
 <body>
     <div class="container mt-4">
         <div class="header text-center">
-            <div class="btn-group" role="group" aria-label="Test Buttons">
+            <h1>Practice Tests</h1>
+            <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
                 <button type="button" class="btn btn-primary" onclick="loadTest('practiceTest1.html')">Test 1</button>
                 <button type="button" class="btn btn-primary" onclick="loadTest('practiceTest2.html')">Test 2</button>
                 <button type="button" class="btn btn-primary" onclick="loadTest('practiceTest3.html')">Test 3</button>
